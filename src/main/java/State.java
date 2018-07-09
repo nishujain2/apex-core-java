@@ -1,7 +1,12 @@
 package main.java;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 
 public class State {
     private String stateCode;
@@ -62,7 +67,16 @@ public class State {
         for (State state : states) {
             System.out.println(state);
         }
+        System.out.println("\n\n");
+        Properties properties = new Properties();
+        try (FileInputStream fileInputStream = new FileInputStream("/Users/nishujain/Documents/Development/apex-core-java/src/main/resources/company.properties")){
+            properties.load(fileInputStream);
+            Enumeration keys = properties.keys();
+            while (keys.hasMoreElements()) {
+                System.out.println(properties.getProperty(keys.nextElement().toString()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
-//Define a class with three fields state code, state name and capitals. And define 10
-//states. And save in an arraylist. And, print all the objects.
